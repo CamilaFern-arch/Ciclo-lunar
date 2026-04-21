@@ -8,8 +8,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Luna">
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2744/2744122.png">
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2744/2744122.png">
+<link rel="apple-touch-icon" href="https://img.icons8.com/ios/500/ae8c9a/moon.png">
+<link rel="icon" type="image/png" href="https://img.icons8.com/ios/500/ae8c9a/moon.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -98,7 +98,7 @@
     margin-top: 8px;
   }
 
-  /* Resto de estilos corregidos (sustituyendo los guiones largos) */
+  /* Resto de estilos corregidos */
   .month-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 28px; margin-bottom: 28px; }
   .month-label { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--deep-plum); }
   .month-label span { font-size: 15px; font-family: 'DM Sans', sans-serif; color: var(--text-light); margin-left: 6px; }
@@ -116,7 +116,7 @@
   .weekdays { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 12px; }
   .weekday { text-align: center; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-light); }
   .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-  .day-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 14px; position: relative; transition: 0.2s; }
+  .day-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 14px; position: relative; transition: 0.2s; cursor: pointer; }
   
   /* Estados del flujo */
   .flow-heavy { background: var(--terracotta) !important; color: white; }
@@ -133,17 +133,17 @@
   .overlay.visible { opacity: 1; pointer-events: all; }
 
   .flow-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 20px 0; }
-  .flow-option { border: 1px solid var(--blush); padding: 12px 5px; border-radius: 12px; background: none; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .flow-option { border: 1px solid var(--blush); padding: 12px 5px; border-radius: 12px; background: none; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer;}
   .flow-option.selected { background: var(--deep-plum); color: white; border-color: var(--deep-plum); }
 
-  .save-btn { width: 100%; padding: 16px; background: var(--deep-plum); color: white; border: none; border-radius: 16px; font-weight: 500; margin-top: 20px; }
+  .save-btn { width: 100%; padding: 16px; background: var(--deep-plum); color: white; border: none; border-radius: 16px; font-weight: 500; margin-top: 20px; cursor: pointer;}
   
   .stats-strip { padding: 0 20px; margin-bottom: 20px; }
   .stats-card { background: var(--deep-plum); border-radius: 20px; padding: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; color: white; text-align: center; }
   .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; }
   .stat-label { font-size: 9px; text-transform: uppercase; opacity: 0.6; }
 
-  .add-profile-btn { border: 1px dashed var(--dusty-rose); padding: 8px 14px; border-radius: 100px; background: none; color: var(--dusty-rose); font-size: 13px; }
+  .add-profile-btn { border: 1px dashed var(--dusty-rose); padding: 8px 14px; border-radius: 100px; background: none; color: var(--dusty-rose); font-size: 13px; cursor: pointer;}
 </style>
 </head>
 <body>
@@ -199,7 +199,6 @@
 </div>
 
 <script>
-  // El JavaScript se mantiene casi igual, solo corregí la vinculación de eventos y visuales
   let state = JSON.parse(localStorage.getItem('luna_state')) || {
     profiles: [{id: 'p1', name: 'Usuario'}],
     activeProfile: 'p1',
@@ -279,7 +278,7 @@
   function updateStats() {
     const data = state.data[state.activeProfile] || {};
     const flows = Object.keys(data).filter(k => data[k].flow !== 'none').sort();
-    document.getElementById('periodLen').innerText = flows.length > 0 ? '5d' : '--';
+    document.getElementById('periodLen').innerText = flows.length > 0 ? flows.length + 'd' : '--';
     document.getElementById('cycleLen').innerText = '28d';
     document.getElementById('daysNext').innerText = '12d';
   }
